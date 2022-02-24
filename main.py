@@ -5,7 +5,7 @@ import yfinance as yf
 import pandas as pd
 
 
-START = "2015-01-01"
+START = "2019-01-01"
 TODAY = date.today().strftime("%Y-%m-%d")
 stocks = ("AAPL", "GOOG", "MSFT", "TSLA")
 
