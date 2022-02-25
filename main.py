@@ -10,17 +10,15 @@ TODAY = date.today().strftime("%Y-%m-%d")
 
 @app.route('/')
 def index():
-    return '<h1>Utility to Retrieve Stock Data</h1>'
+    return '<h1>Utility to Retrieve Stock Data</h1><p>Append any ticker to the url to retrieve market prices</p>'
 
-@app.route('/stock', methods=['GET'])
-def get_price():
-    args = request.args
-    ticker = args.get('ticker')
+@app.route('/<ticker>', methods=['GET'])
+def get_price(ticker):
     df = yf.download(ticker, START, TODAY)
     df.reset_index(inplace=True)
     df['Date'] = pd.to_datetime(df['Date'])
     df.set_index('Date', inplace=True)
-    df = df.resample('2w').mean()
+    df = df.resample('1w').mean()
     
     chart1 = df['Close']
     chart2 = df['Close'].rolling(window = 12).mean().dropna()
