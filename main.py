@@ -12,8 +12,10 @@ TODAY = date.today().strftime("%Y-%m-%d")
 def index():
     return '<h1>Utility to Retrieve Stock Data</h1>'
 
-@app.route('/price/<ticker>')
-def get_price(ticker):
+@app.route('/stock', methods=['GET'])
+def get_price():
+    args = request.args
+    ticker = args.get('ticker')
     df = yf.download(ticker, START, TODAY)
     df.reset_index(inplace=True)
     df['Date'] = pd.to_datetime(df['Date'])
