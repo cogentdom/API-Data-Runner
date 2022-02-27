@@ -5,8 +5,9 @@ import yfinance as yf
 import pandas as pd
 
 
-START = "2020-01-01"
-TODAY = date.today().strftime("%Y-%m-%d")
+TODAY = date.today()
+START = date(TODAY.year-1, TODAY.month, TODAY.day).strftime("%Y-%m-%d")
+TODAY = TODAY.strftime("%Y-%m-%d")
 
 @app.route('/')
 def index():
